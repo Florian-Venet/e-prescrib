@@ -6,10 +6,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div className="content-container">
-          <div className="left-section">
             <div className="logo-container">
               <img src="./logo.png" alt="logo" className="logo" />
             </div>
+            <div className="left-section">
             <div className="login-section">
               <p>Connexion</p>
               <div className="input-container">
