@@ -3,7 +3,7 @@
 }
 
 .App-header {
-  background-color: rgb(243, 237, 237);
+  background-color: rgba(194, 190, 190, 0.219);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -21,8 +21,11 @@
 }
 
 .left-section {
-  text-align: left;
-  padding-right: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding-right: 20px;
 }
 
 .logo-container {
@@ -37,9 +40,13 @@
 }
 
 .vertical-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
   width: 1px;
-  height: 100%;
   background-color: #282c34;
+  margin-left: -0.5px;
 }
 
 .login-section {
@@ -54,10 +61,3 @@
 .right-section {
   flex: 1;
 }
-
-
-.App {
-  text-align: center;
-}
-
-

@@ -4,14 +4,16 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="content-container">
+      <div className="content-container">
+        <header className="App-header">
+        
             <div className="logo-container">
               <img src="./logo.png" alt="logo" className="logo" />
             </div>
+        </header>
             <div className="left-section">
             <div className="login-section">
-              <p>Connexion</p>
+              <p><h2>Connexion</h2></p>
               <div className="input-container">
                 <label htmlFor="email">E-mail</label>
                 <br />
@@ -30,7 +32,6 @@ function App() {
             {/* Contenu de la partie droite */}
           </div>
         </div>
-      </header>
     </div>
   );
 }
