@@ -94,16 +94,18 @@
   font-weight: bold;
   text-align: center;
   text-decoration: none;
-  border: none;
+  border: 1px solid black;
   border-radius: 4px;
-  background-color: #4CAF50;
-  color: #fff;
+  background-color: #282c34;
+  color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 81%;
 }
 
 .button:hover {
-  background-color: #45a049;
+  background-color: white;
+  color: #282c34;
 }
 
 
