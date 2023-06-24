@@ -27,6 +27,8 @@ function App() {
               <br />
               <input type="password" id="password" />
             </div>
+            <br/>
+            <button type="button" className="button">Se connecter</button>
             <p>Pas encore inscrit ? <a href="./inscription.js">Inscription</a></p>
           </div>
         </div>
