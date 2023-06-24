@@ -1,5 +1,5 @@
 import React from 'react';
-import './inscription.css';
+import './App.css';
 
 function App() {
   return (
@@ -7,12 +7,15 @@ function App() {
       <div className="content-container">
         <header className="App-header">
           <div className="logo-container">
+            <div className="header-text">
+              <h2>ePrescrin</h2>
+            </div>
             <img src="./logo.png" alt="logo" className="logo" />
           </div>
           <div className="header-divider"></div>
         </header>
         <div className="left-section">
-          <div className="signup-section">
+          <div className="login-section">
             <h2>Inscription</h2>
             <div className="input-container">
               <label htmlFor="email">E-mail</label>
@@ -24,11 +27,13 @@ function App() {
               <br />
               <input type="password" id="password" />
               <br/>
-              <label htmlFor="password">Répéter le mot de passe</label>
+              <label htmlFor="password">Mot de passe</label>
               <br />
               <input type="password" id="password" />
             </div>
-            <p>Déjà inscrit ? <a href="/App.js">Connexion</a></p>
+            <br/>
+            <button type="button" className="button">S'inscrire</button>
+            <p>Déjà inscrit ? <a href="./App.js">Connexion</a></p>
           </div>
         </div>
         <div className="vertical-line"></div>
