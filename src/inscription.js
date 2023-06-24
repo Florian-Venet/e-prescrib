@@ -28,7 +28,7 @@ function App() {
               <br />
               <input type="password" id="password" />
             </div>
-            <p>Pas encore inscrit ? <a href="/inscription">Inscription</a></p>
+            <p>Déjà inscrit ? <a href="/App.js">Connexion</a></p>
           </div>
         </div>
         <div className="vertical-line"></div>

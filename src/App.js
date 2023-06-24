@@ -7,6 +7,9 @@ function App() {
       <div className="content-container">
         <header className="App-header">
           <div className="logo-container">
+            <div className="header-text">
+              <h2>ePrescrin</h2>
+            </div>
             <img src="./logo.png" alt="logo" className="logo" />
           </div>
           <div className="header-divider"></div>
@@ -24,7 +27,7 @@ function App() {
               <br />
               <input type="password" id="password" />
             </div>
-            <p>Pas encore inscrit ? <a href=".\inscription.js">Inscription</a></p>
+            <p>Pas encore inscrit ? <a href="./inscription.js">Inscription</a></p>
           </div>
         </div>
         <div className="vertical-line"></div>
