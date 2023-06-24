@@ -58,7 +58,8 @@
 .logo-container {
   display: flex;
   align-items: flex-start; /* Aligne le logo en haut */
-  margin-bottom: 25px;
+  margin-bottom: 10px;
+  margin-left: 2%;
 }
 
 .logo {
