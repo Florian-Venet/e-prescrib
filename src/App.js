@@ -32,7 +32,6 @@ function App() {
           <div className="right-content">
             <h2>Pourquoi utiliser ePrescrib ?</h2>
             <p>ePrescrip simplifie grandement les rapports entre médecins, patients et pharmaciens. Grâce à notre ordonnance digitalisée, fini l'utilisation intensive de papier.</p>
-            <p>Un geste pour la planète, et un geste pour le pharmacien qui pourra enfin lire votre ordonnance sans appeler des collègues pour vous déchiffrer.</p>
             <h2>Comment ça fonctionne ?</h2>
             <p>Appuez sur "nouvelle ordonnance pour créer un nouveau document, renseignez les informations nécessaire et finaliser là en appuyant sur "générer", ce qui va créer le QR code pour autentifier l'ordonnance. Le patient n'a plus qu'a se rendre sur son application ePrescrib et scanner le QR code avant de se rendre en pharamacie </p>
             <img src="./ordonnance.jpg" alt="image" className="custom-image" />
