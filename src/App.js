@@ -18,7 +18,7 @@ function Note() {
   const onAddNote = () => {
     const newNote = {
       id: uuid(),
-      title: "Untitled Note",
+      title: "Titre nouvelle ordonnance...",
       body: "",
       lastModified: Date.now(),
     };
@@ -48,15 +48,28 @@ function Note() {
   };
   
   return (
-    <div className="note">
-      <Sidebar
-        notes={notes}
-        onAddNote={onAddNote}
-        onDeleteNote={onDeleteNote}
-        activeNote={activeNote}
-        setActiveNote={setActiveNote}
-      />
-      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+    <div className="App">
+      <div className="content-container">
+        <header className="App-header">
+          <div className="logo-container">
+            <div className="header-text">
+              <h2>ePrescrin</h2>
+            </div>
+            <img src="./logo.png" alt="logo" className="logo" />
+          </div>
+          <div className="header-divider"></div>
+        </header>
+        <div className="note">
+          <Sidebar
+            notes={notes}
+            onAddNote={onAddNote}
+            onDeleteNote={onDeleteNote}
+            activeNote={activeNote}
+            setActiveNote={setActiveNote}
+          />
+          <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
+        </div>
+      </div>
     </div>
   );
 }

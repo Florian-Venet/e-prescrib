@@ -1,18 +1,69 @@
+
 * {
     box-sizing: border-box;
   }
   
-  /* GLOBAL STYLES */
+  .App-header {
+    background-color: #282c34;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #282c34;
+    position: fixed; /* Fixe le header en haut de la page */
+    top: 0; /* Place le header en haut de la page */
+    z-index: 100; /* Définit une valeur de z-index pour s'assurer que le header est au-dessus des autres éléments */
+  }
   
+  .header-text {
+    color: white;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: flex-start; /* Aligne le logo en haut */
+    margin-bottom: 10px;
+    margin-left: 2%;
+  }
+  
+  .logo {
+    height: 8vmin;
+    pointer-events: none;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  
+  .header-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: #282c34;
+  }
+
+  /*--------------BODY-------------------*/
+  
+  .content-container {
+    padding-top: 60px; /* Ajoute de l'espace en haut pour éviter que le contenu ne soit caché par le header */
+    width: 100%;
+    height: 100vh;
+    overflow: auto; /* Ajoute une barre de défilement si le contenu dépasse la hauteur de l'écran */
+  }
+  
+  .note {
+    display: flex;
+    height: calc(100vh - 60px); /* Ajuste la hauteur pour tenir compte de la hauteur du header */
+    overflow: auto; /* Ajoute une barre de défilement si le contenu dépasse la hauteur de l'écran */
+  } 
+
   body,
-  .Note {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  .App {
     width: 100%;
     height: 100vh;
     overflow: hidden;
     font-size: 16px;
-    background: url(https://www.toptal.com/designers/subtlepatterns/patterns/lightpaperfibers.png);
   }
   
   button {
@@ -29,32 +80,32 @@
     color: #04c;
   }
   
-  .Note {
+  .App {
     display: flex;
   }
   
-  /* SIDEBAR STYLES */
+  /*--------------SIDEBAR STYLES----------*/
   
-  .note-sidebar {
+  .app-sidebar {
     width: 30%;
     height: 100vh;
     border-right: 1px solid #ddd;
   }
   
-  .note-sidebar-header {
+  .app-sidebar-header {
     display: flex;
     justify-content: space-between;
     padding: 25px;
   }
-  .note-sidebar-header h1 {
+  .app-sidebar-header h1 {
     margin: 0;
   }
   
-  .note-sidebar-notes {
+  .app-sidebar-notes {
     height: calc(100vh - 78px);
     overflow-y: scroll;
   }
-  .note-sidebar-note {
+  .app-sidebar-note {
     padding: 25px;
     cursor: pointer;
   }
@@ -62,34 +113,34 @@
     display: flex;
     justify-content: space-between;
   }
-  .note-sidebar-note button {
+  .app-sidebar-note button {
     color: crimson;
   }
-  .note-sidebar-note p {
+  .app-sidebar-note p {
     margin: 10px 0;
   }
-  .note-sidebar-note small {
+  .app-sidebar-note small {
     display: block;
     color: #999;
   }
   
-  .note-sidebar-note:hover {
+  .app-sidebar-note:hover {
     background: #ddd;
   }
-  .note-sidebar-note.active,
-  .note-sidebar-note.active small {
+  .app-sidebar-note.active,
+  .app-sidebar-note.active small {
     background: #08c;
     color: white;
   }
   
   /* NOTE EDITOR/PREVIEW (MAIN) STYLES */
   
-  .note-main {
+  .app-main {
     width: 70%;
     height: 100vh;
   }
-  .note-main-note-edit,
-  .note-main-note-preview {
+  .app-main-note-edit,
+  .app-main-note-preview {
     height: 50vh;
   }
   
@@ -102,12 +153,14 @@
     color: #999;
   }
   
-  /* Editing */
-  .note-main-note-edit {
+  /*-------Editer--------*/
+
+
+  .app-main-note-edit {
     padding: 25px;
   }
   
-  .note-main-note-edit input,
+  .app-main-note-edit input,
   textarea {
     display: block;
     border: 1px solid #ddd;
@@ -119,13 +172,15 @@
     font-size: inherit;
     font-family: inherit;
   }
-  .note-main-note-edit input {
+  .app-main-note-edit input {
     height: 50px;
     font-size: 2rem;
   }
   
-  /* Preview */
-  .note-main-note-preview {
+  /*----------Preview------------*/
+
+
+  .app-main-note-preview {
     border-top: 1px solid #ddd;
     overflow-y: scroll;
     background: rgba(0, 0, 0, 0.02);
