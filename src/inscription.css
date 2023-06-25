@@ -76,7 +76,7 @@
   
   /*---------LEFT SIDE--------*/
   
-  .signup-section {
+  .login-section {
     display: flex;
     flex-direction: column;
     margin-left: 150px;
@@ -111,9 +111,9 @@
   
    /*------RIGHT SIDE-----------*/
   
-  .right-section {
+   .right-section {
     margin-right: 30px;
-    margin-left: 15%;
+    margin-left: 18%;
     flex: 1;
   }
   
@@ -125,4 +125,5 @@
     width: 30%;
     height: 30%;
   }
+  
   

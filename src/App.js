@@ -1,3 +1,6 @@
+
+
+
 import React from 'react';
 import './App.css';
 
@@ -8,7 +11,7 @@ function App() {
         <header className="App-header">
           <div className="logo-container">
             <div className="header-text">
-              <h2>ePrescrin</h2>
+              <h2>ePrescrib</h2>
             </div>
             <img src="./logo.png" alt="logo" className="logo" />
           </div>
@@ -48,3 +51,4 @@ function App() {
 }
 
 export default App;
+//

@@ -1,7 +1,7 @@
 import React from 'react';
-import './App.css';
+import './inscription.css';
 
-function App() {
+function Inscription() {
   return (
     <div className="App">
       <div className="content-container">
@@ -26,8 +26,8 @@ function App() {
               <label htmlFor="password">Mot de passe</label>
               <br />
               <input type="password" id="password" />
-              <br/>
-              <label htmlFor="password">Mot de passe</label>
+              <br/><br/>
+              <label htmlFor="password">Confirmer le mot de passe</label>
               <br />
               <input type="password" id="password" />
             </div>
@@ -51,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default Inscription;
