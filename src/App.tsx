@@ -1,27 +1,19 @@
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material";
 import Router from "./Router";
 
 function App() {
-  const nav = useNavigate();
-
-  const goHome = () => {
-    nav('/home');
-  }
-
-  const goAuth = () => {
-    nav('auth');
-  }
 
   return (
-    <div>
-      <ul>
-        <li><Button onClick={goAuth}>Auth</Button></li>
-        <li><Button onClick={goHome}>Home</Button></li>
-      </ul>
+    <ThemeProvider theme={theme}>
       <Router />
-    </div>
+    </ThemeProvider>
   );
 }
 
 export default App;
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Open Sans"
+  }
+});
