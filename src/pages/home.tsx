@@ -6,6 +6,7 @@ export default function Home(){
     <div>
       <NavBarre/>
       <OrdoList/>
+      florian venet 
     </div>
   )
 }
