@@ -10,9 +10,9 @@ export default function NavBarre() {
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <img src={logo} className={styles.logo} style={{ marginRight: '10px' }} alt="logo" />
-          <Typography sx={{ fontFamily: 'Montserrat' }} variant="h5">ePrescrib</Typography>
+          <Typography sx={{ fontFamily: 'Montserrat' }} style={{ color: 'white' }} variant="h5">ePrescrib</Typography>
         </Box>
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" style={{ color: 'white' }}>
         <LogoutIcon />
         </IconButton>
         </Box>
