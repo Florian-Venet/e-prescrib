@@ -1,6 +1,11 @@
 .navBarre {
-    background-color: rgb(224, 210, 210);
+    background-color:#4153EF;
+    ;
     width: 100vw;
 
 }
 
+.logo {
+    width: 45px;
+    height:45px;
+}
