@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import New from './pages/new';
 
 const Auth = React.lazy(() => import('./pages/auth'));
 const Home = React.lazy(() => import('./pages/home'));
@@ -12,6 +13,7 @@ const Router = () => {
       <Routes>
         <Route path='/auth' element={<Auth/>} />
         <Route path='/home' element={<Home />} />
+        <Route path='/new' element={<New />} />
       </Routes>
     </React.Suspense>
   );
