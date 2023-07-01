@@ -39,10 +39,6 @@ export default function NewOrdo(){
         </div>  
 
     
-
-
-
-
         <Box
           component="form"
           sx={{
@@ -54,11 +50,7 @@ export default function NewOrdo(){
           <TextField id="outlined-basic" label="Prénom" variant="outlined" />
           <TextField id="outlined-basic" label="Nom" variant="outlined" />
         </Box>
-        
-        
-        
-        
-        
+         
 
         <Box
       component="form"
@@ -106,7 +98,38 @@ export default function NewOrdo(){
         
 
 
-
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 2, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <Grid container spacing={9} alignItems="center">
+        <Grid item xs={6}>
+          <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id="outlined-select-boites-native"
+            select
+            label="Nombres de boîtes"
+            defaultValue="0"
+            SelectProps={{
+              native: true,
+            }}
+            variant="outlined"
+          >
+            {boites.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </TextField>
+        </Grid>
+      </Grid>
+    </Box>
 
 
         <Box
@@ -126,9 +149,6 @@ export default function NewOrdo(){
             />
           </div>
         </Box>
-
-
-
 
 
         <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px", m: 2}} disableElevation>
