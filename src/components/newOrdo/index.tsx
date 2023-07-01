@@ -1,11 +1,13 @@
 import React from 'react';
-import { Typography, Box, IconButton, Button, Divider, TextField, Grid } from '@mui/material';
+import { Typography, Box, IconButton, Button, Divider, TextField, Grid, Fab, CssBaseline, Container } from '@mui/material';
 import styles from './styles.module.css';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import useIsMobile from '../../hooks/useIsMobile';
 import MenuItem from "@mui/material/MenuItem";
+import AddIcon from '@mui/icons-material/Add';
+
 
 const médicaments = [
   { value: "aucun", label: "Aucun" },
@@ -27,8 +29,14 @@ const boites = [
   { value: "5", label: "5" }
 ];
 
+
 export default function NewOrdo(){
   const isMobile = useIsMobile();
+  const [formRows, setFormRows] = useState([{ médicaments: 'aucun', boite: '0' }]);
+  const handleAddRow = () => {
+  const newRow = { médicaments: 'aucun', boite: '0' };
+  setFormRows([...formRows, newRow]);
+};
 
   return (
     <div className={styles.content} style={{width: !isMobile ? "30vw" : "80vw"}}>
@@ -52,50 +60,63 @@ export default function NewOrdo(){
         </Box>
          
 
-        <Box
+
+    <Box
       component="form"
       sx={{
         '& .MuiTextField-root': { m: 2, width: '25ch' },
       }}
       noValidate
     >
-      <Grid container spacing={9}>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-select-médicaments"
-            select
-            label="Médicaments"
-            defaultValue="aucun"
-            variant="outlined"
-          >
-            {médicaments.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+      
+      {formRows.map((row, index) => (
+        <Grid container spacing={9} key={index}>
+          <Grid item xs={6}>
+            <TextField
+              id={`outlined-select-médicaments-${index}`}
+              select
+              label="Médicaments"
+              defaultValue={row.médicaments}
+              variant="outlined"
+            >
+              {médicaments.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id={`outlined-select-boites-native-${index}`}
+              select
+              label="Nombres de boîtes"
+              defaultValue={row.boite}
+              SelectProps={{
+                native: true,
+              }}
+              variant="outlined"
+            >
+              {boites.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-select-boites-native"
-            select
-            label="Nombres de boîtes"
-            defaultValue="0"
-            SelectProps={{
-              native: true,
-            }}
-            variant="outlined"
-          >
-            {boites.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
+      ))}
+
+      <Grid container justifyContent="flex-end">
+        <Grid item>
+          <Fab color="primary" aria-label="add" onClick={handleAddRow}>
+            <AddIcon />
+          </Fab>
         </Grid>
       </Grid>
     </Box>
-        
+
+    
 
 
     <Box
@@ -128,6 +149,11 @@ export default function NewOrdo(){
             ))}
           </TextField>
         </Grid>
+        <Grid item xs={6}>
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Grid>
       </Grid>
     </Box>
 
@@ -151,10 +177,21 @@ export default function NewOrdo(){
         </Box>
 
 
-        <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px", m: 2}} disableElevation>
+        <Button variant='contained' sx={{backgroundColor: "#4953EF", borderRadius: "15px", m: 2}} disableElevation>
             Créer l'ordonnance
         </Button>
 
+
+
+        <React.Fragment>
+          <CssBaseline />
+          <Container fixed>
+            <Box sx={{ bgcolor: '#f9ede3', height: '90vh', width: '80vh' }} />
+          </Container>
+        </React.Fragment>
+
+
+    
     </div>
   )
 };
