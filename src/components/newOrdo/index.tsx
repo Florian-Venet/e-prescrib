@@ -1,13 +1,10 @@
 import React from 'react';
-import { Typography, Box, IconButton, Button, Divider, TextField, Grid, Fab, CssBaseline, Container } from '@mui/material';
-import styles from './styles.module.css';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import useIsMobile from '../../hooks/useIsMobile';
+import { Typography, Box, TextField, Grid, Fab, Button } from '@mui/material';
 import MenuItem from "@mui/material/MenuItem";
 import AddIcon from '@mui/icons-material/Add';
-
+import { useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
+import styles from './styles.module.css';
 
 const médicaments = [
   { value: "aucun", label: "Aucun" },
@@ -29,24 +26,34 @@ const boites = [
   { value: "5", label: "5" }
 ];
 
-
-export default function NewOrdo(){
+export default function NewOrdo() {
   const isMobile = useIsMobile();
   const [formRows, setFormRows] = useState([{ médicaments: 'aucun', boite: '0' }]);
+  const [prenom, setPrenom] = useState('');
+  const [nom, setNom] = useState('');
+  const [ordonnance, setOrdonnance] = useState('Patient :');
+
   const handleAddRow = () => {
-  const newRow = { médicaments: 'aucun', boite: '0' };
-  setFormRows([...formRows, newRow]);
-};
+    const newRow = { médicaments: 'aucun', boite: '0' };
+    setFormRows([...formRows, newRow]);
+  };
+
+  const generateOrdonnanceString = () => {
+    const patient = `Patient: ${prenom} ${nom}`;
+    const medicaments = formRows.map((row) => `Médicament: ${row.médicaments}, Boîtes: ${row.boite}`);
+    const ordonnanceString = `${patient}\n${medicaments.join('\n')}`;
+    setOrdonnance(ordonnanceString);
+  };
 
   return (
-    <div className={styles.content} style={{width: !isMobile ? "30vw" : "80vw"}}>
+    <div className={styles.content} style={{ width: !isMobile ? "30vw" : "80vw" }}>
+      <div className="split left">
         <div className={styles.title}>
-          <Typography sx={{fontFamily: "Montserrat", m: 2}} variant='h5'>
+          <Typography sx={{ fontFamily: "Montserrat", m: 2 }} variant='h5'>
             Nouvelle ordonnance
           </Typography>
-        </div>  
+        </div>
 
-    
         <Box
           component="form"
           sx={{
@@ -55,43 +62,92 @@ export default function NewOrdo(){
           noValidate
           autoComplete="off"
         >
-          <TextField id="outlined-basic" label="Prénom" variant="outlined" />
-          <TextField id="outlined-basic" label="Nom" variant="outlined" />
+          <TextField
+            id="outlined-basic"
+            label="Prénom"
+            variant="outlined"
+            value={prenom}
+            onChange={(e) => setPrenom(e.target.value)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Nom"
+            variant="outlined"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
+          />
         </Box>
-         
+
+        {formRows.map((row, index) => (
+          <Grid container spacing={9} key={index}>
+            <Grid item xs={6}>
+              <TextField
+                id={`outlined-select-médicaments-${index}`}
+                select
+                label="Médicaments"
+                value={row.médicaments}
+                onChange={(e) => {
+                  const updatedFormRows = [...formRows];
+                  updatedFormRows[index].médicaments = e.target.value;
+                  setFormRows(updatedFormRows);
+                }}
+                variant="outlined"
+              >
+                {médicaments.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                id={`outlined-select-boites-native-${index}`}
+                select
+                label="Nombres de boîtes"
+                value={row.boite}
+                onChange={(e) => {
+                  const updatedFormRows = [...formRows];
+                  updatedFormRows[index].boite = e.target.value;
+                  setFormRows(updatedFormRows);
+                }}
+                SelectProps={{
+                  native: true,
+                }}
+                variant="outlined"
+              >
+                {boites.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+        ))}
+
+        
 
 
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 2, width: '25ch' },
-      }}
-      noValidate
-    >
-      
-      {formRows.map((row, index) => (
-        <Grid container spacing={9} key={index}>
+
+        <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 2, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        >
+        <Grid container spacing={9} alignItems="center">
           <Grid item xs={6}>
-            <TextField
-              id={`outlined-select-médicaments-${index}`}
-              select
-              label="Médicaments"
-              defaultValue={row.médicaments}
-              variant="outlined"
-            >
-              {médicaments.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
+            <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
           </Grid>
           <Grid item xs={6}>
             <TextField
-              id={`outlined-select-boites-native-${index}`}
+              id="outlined-select-boites-native"
               select
               label="Nombres de boîtes"
-              defaultValue={row.boite}
+              defaultValue="0"
               SelectProps={{
                 native: true,
               }}
@@ -104,94 +160,49 @@ export default function NewOrdo(){
               ))}
             </TextField>
           </Grid>
+          <Grid item xs={6}>
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Grid>
         </Grid>
-      ))}
-
-      <Grid container justifyContent="flex-end">
-        <Grid item>
-          <Fab color="primary" aria-label="add" onClick={handleAddRow}>
-            <AddIcon />
-          </Fab>
-        </Grid>
-      </Grid>
-    </Box>
-
-    
-
-
-    <Box
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 2, width: '25ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Grid container spacing={9} alignItems="center">
-        <Grid item xs={6}>
-          <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id="outlined-select-boites-native"
-            select
-            label="Nombres de boîtes"
-            defaultValue="0"
-            SelectProps={{
-              native: true,
-            }}
-            variant="outlined"
-          >
-            {boites.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
-        </Grid>
-        <Grid item xs={6}>
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
-        </Grid>
-      </Grid>
-    </Box>
-
-
-        <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 2, width: '60ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <div>     
-            <TextField
-              id="outlined-multiline-static"
-             multiline
-              rows={7}
-              defaultValue="Commentaire"
-            />
-          </div>
         </Box>
 
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <Fab color="primary" aria-label="add" onClick={handleAddRow}>
+              <AddIcon />
+            </Fab>
+          </Grid>
+        </Grid>
 
-        <Button variant='contained' sx={{backgroundColor: "#4953EF", borderRadius: "15px", m: 2}} disableElevation>
-            Créer l'ordonnance
+        <Button
+          variant='contained'
+          sx={{ backgroundColor: "#4953EF", borderRadius: "15px", m: 2 }}
+          disableElevation
+          onClick={generateOrdonnanceString}
+        >
+          Créer l'ordonnance
         </Button>
 
-
-
-        <React.Fragment>
-          <CssBaseline />
-          <Container fixed>
-            <Box sx={{ bgcolor: '#f9ede3', height: '90vh', width: '80vh' }} />
-          </Container>
-        </React.Fragment>
-
-
-    
+      </div>
+      <div className="split right">
+        <Box
+          component="div"
+          sx={{
+            bgcolor: '#f9ede3',
+            height: '90vh',
+            width: '80vh',
+            padding: '16px',
+            overflow: 'auto'
+          }}
+        >
+          <Typography variant="body1">{ordonnance}</Typography>
+        </Box>
+      </div>
     </div>
-  )
-};
+  );
+}
+
+
+

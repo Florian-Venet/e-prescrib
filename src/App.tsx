@@ -1,12 +1,15 @@
 import { ThemeProvider, createTheme } from "@mui/material";
 import Router from "./Router";
+import { AuthProvider, useAuth } from "./firebase/authProvider";
 
 function App() {
-
+  const auth = useAuth();
   return (
-    <ThemeProvider theme={theme}>
-      <Router />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Router user={auth.user} />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
