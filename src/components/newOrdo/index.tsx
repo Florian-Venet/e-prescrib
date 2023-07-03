@@ -1,204 +1,93 @@
-import React from 'react';
-import { Typography, Box, TextField, Grid, Fab, Button } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { Box, Button, FormControl, IconButton, InputLabel, Select, SelectChangeEvent, TextField, Typography } from '@mui/material';
 import MenuItem from "@mui/material/MenuItem";
-import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile';
+import { Prescription } from '../../pages/new';
 import styles from './styles.module.css';
 
-const médicaments = [
-  { value: "aucun", label: "Aucun" },
-  { value: "paracétamol", label: "Paracétamol" },
-  { value: "ibuprofène", label: "Ibuprofène" },
-  { value: "tramadol ", label: "Tramadol " },
-  { value: "amoxicilline", label: "Amoxicilline" },
-  { value: "cholécalciférol", label: "Cholécalciférol" },
-  { value: "phloroglucinol", label: "Phloroglucinol" },
-  { value: "martinmeniole", label: "Martinmeniole" }
+const medicaments = [
+  { id: "3314", name: "Aucun" },
+  { id: "2313", name: "Paracétamol" },
+  { id: "3453", name: "Ibuprofène" },
+  { id: "6576", name: "Tramadol" },
+  { id: "4534", name: "Amoxicilline" },
+  { id: "4367", name: "Cholécalciférol" },
+  { id: "9087", name: "Phloroglucinol" },
+  { id: "3246", name: "Martinmeniole" }
 ];
 
-const boites = [
-  { value: "0", label: "0" },
-  { value: "1", label: "1" },
-  { value: "2", label: "2" },
-  { value: "3", label: "3" },
-  { value: "4", label: "4" },
-  { value: "5", label: "5" }
+const quantity = [
+  { id: "3314", name: "0" },
+  { id: "2313", name: "1" },
+  { id: "3453", name: "2" },
+  { id: "6576", name: "3" },
+  { id: "4534", name: "4" },
+  { id: "4367", name: "5" },
+  { id: "9087", name: "6" },
+  { id: "3246", name: "7" }
 ];
 
-export default function NewOrdo() {
-  const isMobile = useIsMobile();
-  const [formRows, setFormRows] = useState([{ médicaments: 'aucun', boite: '0' }]);
-  const [prenom, setPrenom] = useState('');
-  const [nom, setNom] = useState('');
-  const [ordonnance, setOrdonnance] = useState('Patient :');
+type NewOrdoProps = {
+  fn: string;
+  ln: string;
+  comment: string;
+  setFn(s: string): void;
+  setLn(s: string): void;
+  setContent: React.Dispatch<React.SetStateAction<Prescription[]>>;
+  setComment(s: string): void
+  handleGenerate(): void;
+}
 
-  const handleAddRow = () => {
-    const newRow = { médicaments: 'aucun', boite: '0' };
-    setFormRows([...formRows, newRow]);
-  };
+export default function NewOrdo(props : NewOrdoProps) {
+  const { fn, ln, comment, setFn, setLn, setComment, setContent, handleGenerate } = props;
+  const { isTablet }  = useIsMobile();
+  const [selectedMed, setSelectedMed] = useState<{id: string; name:string} | null>(null);
+  const [selectedQ, setSelectedQ] = useState<{id: string; name:string} | null>(null);
 
-  const generateOrdonnanceString = () => {
-    const patient = `Patient: ${prenom} ${nom}`;
-    const medicaments = formRows.map((row) => `Médicament: ${row.médicaments}, Boîtes: ${row.boite}`);
-    const ordonnanceString = `${patient}\n${medicaments.join('\n')}`;
-    setOrdonnance(ordonnanceString);
-  };
+  function addPrescription() {
+    if(!selectedMed || !selectedQ) return;
+    let presc:Prescription = {
+      id: selectedMed.id,
+      name: selectedMed.name,
+      quantity: parseInt(selectedQ.name, 10)
+    };
+    setContent((current) => [...current, presc])
+  }
 
   return (
-    <div className={styles.content} style={{ width: !isMobile ? "30vw" : "80vw" }}>
-      <div className="split left">
-        <div className={styles.title}>
-          <Typography sx={{ fontFamily: "Montserrat", m: 2 }} variant='h5'>
-            Nouvelle ordonnance
-          </Typography>
-        </div>
-
-        <Box
-          component="form"
-          sx={{
-            display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '16px', m: 2,
-          }}
-          noValidate
-          autoComplete="off"
-        >
+    <div className={styles.content} style={{width: isTablet ? "90%" : "35%"}}>
+      <Typography variant='h4'>Nouvelle ordonnance</Typography>
+      <div className={styles.form}>
+        <div className={styles.row}>
           <TextField
-            id="outlined-basic"
             label="Prénom"
             variant="outlined"
-            value={prenom}
-            onChange={(e) => setPrenom(e.target.value)}
+            value={fn}
+            onChange={(e) => setFn(e.target.value)}
           />
           <TextField
-            id="outlined-basic"
             label="Nom"
             variant="outlined"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
+            value={ln}
+            onChange={(e) => setLn(e.target.value)}
           />
-        </Box>
+        </div>
 
-        {formRows.map((row, index) => (
-          <Grid container spacing={9} key={index}>
-            <Grid item xs={6}>
-              <TextField
-                id={`outlined-select-médicaments-${index}`}
-                select
-                label="Médicaments"
-                value={row.médicaments}
-                onChange={(e) => {
-                  const updatedFormRows = [...formRows];
-                  updatedFormRows[index].médicaments = e.target.value;
-                  setFormRows(updatedFormRows);
-                }}
-                variant="outlined"
-              >
-                {médicaments.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                id={`outlined-select-boites-native-${index}`}
-                select
-                label="Nombres de boîtes"
-                value={row.boite}
-                onChange={(e) => {
-                  const updatedFormRows = [...formRows];
-                  updatedFormRows[index].boite = e.target.value;
-                  setFormRows(updatedFormRows);
-                }}
-                SelectProps={{
-                  native: true,
-                }}
-                variant="outlined"
-              >
-                {boites.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </TextField>
-            </Grid>
-          </Grid>
-        ))}
+        <div className={styles.row}>
+          <BasicSelect name={"Médicaments"} items={medicaments} value={selectedMed} setValue={setSelectedMed}/>
+          <BasicSelect name={"Quantité"} items={quantity} value={selectedQ} setValue={setSelectedQ}/>
+          <IconButton sx={{width: '3rem', height: '3rem'}} onClick={addPrescription}>
+            <Add/>
+          </IconButton>
+        </div>
 
-        
-
-
-
-        <Box
-        component="form"
-        sx={{
-          '& .MuiTextField-root': { m: 2, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-        >
-        <Grid container spacing={9} alignItems="center">
-          <Grid item xs={6}>
-            <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              id="outlined-select-boites-native"
-              select
-              label="Nombres de boîtes"
-              defaultValue="0"
-              SelectProps={{
-                native: true,
-              }}
-              variant="outlined"
-            >
-              {boites.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-          </Grid>
-          <Grid item xs={6}>
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Grid>
-        </Grid>
-        </Box>
-
-        <Grid container justifyContent="flex-end">
-          <Grid item>
-            <Fab color="primary" aria-label="add" onClick={handleAddRow}>
-              <AddIcon />
-            </Fab>
-          </Grid>
-        </Grid>
-
-        <Button
-          variant='contained'
-          sx={{ backgroundColor: "#4953EF", borderRadius: "15px", m: 2 }}
-          disableElevation
-          onClick={generateOrdonnanceString}
-        >
-          Créer l'ordonnance
-        </Button>
-
+        <TextField fullWidth label="Commentaires" multiline rows={6} value={comment} onChange={(e) => setComment(e.target.value)}/>
       </div>
-      <div className="split right">
-        <Box
-          component="div"
-          sx={{
-            bgcolor: '#f9ede3',
-            height: '90vh',
-            width: '80vh',
-            padding: '16px',
-            overflow: 'auto'
-          }}
-        >
-          <Typography variant="body1">{ordonnance}</Typography>
-        </Box>
+      <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+        <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation onClick={handleGenerate}>
+          Signer et générer
+        </Button>
       </div>
     </div>
   );
@@ -206,3 +95,39 @@ export default function NewOrdo() {
 
 
 
+type SelectProps = {
+  name: string;
+  items: {id: string, name: string}[];
+  value: {
+    id: string;
+    name: string;
+  } | null;
+  setValue: React.Dispatch<React.SetStateAction<{
+    id: string;
+    name: string;
+  } | null>>;
+}
+
+const BasicSelect = ({name,items, value, setValue} : SelectProps) => {
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setValue({id: "4546", name: event.target.value});
+  };
+
+  return (
+    <Box sx={{ minWidth: name === 'Quantité' ? 120 : 150 }}>
+      <FormControl fullWidth>
+        <InputLabel>{name}</InputLabel>
+        <Select
+          value={value?.name}
+          label={name}
+          onChange={handleChange}
+        >
+          {items.map((item) => (
+            <MenuItem value={item.name}>{item.name}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}

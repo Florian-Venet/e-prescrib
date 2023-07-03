@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 
 export default function AuthForm(){
-  const isMobile = useIsMobile();
+  const { isMobile } = useIsMobile();
   const navigate = useNavigate()
 
   const [login, setLogin] = useState(false);
