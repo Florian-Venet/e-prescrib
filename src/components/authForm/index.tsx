@@ -2,15 +2,15 @@ import { Button, Divider, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../firebase/authProvider';
+import { signInUser } from '../../firebase/firebase';
 import useIsMobile from '../../hooks/useIsMobile';
+
 import styles from './styles.module.css';
 
 
 export default function AuthForm(){
   const isMobile = useIsMobile();
-  const navigate = useNavigate();
-  const { signIn, signUp } = useAuth();
+  const navigate = useNavigate()
 
   const [login, setLogin] = useState(false);
   const [username, setUsername] = useState("");
@@ -20,14 +20,19 @@ export default function AuthForm(){
   const handleToggle = () => {
     setLogin(!login);
   }
+  
+  const handleSubmit = async () => {
+    try {
+      // Send the email and password to firebase
+      const userCredential = await signInUser(email, password)
 
-  const handleAuth = () => {
-    if(login){
-      signIn(email, password);
-    } else {
-      signUp(email, password);
+      if (userCredential) {
+        navigate('/home');
+      }
+    } catch (error:any) {
+      console.log('User Sign In Failed', error.message);
     }
-  }
+  };
 
   return (
     <div className={styles.content} style={{width: !isMobile ? "30vw" : "80vw"}}>
@@ -52,8 +57,8 @@ export default function AuthForm(){
         <TextField id="password" label="Mot de passe" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
 
-      <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation onClick={handleAuth}>
-        S'inscrire
+      <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation onClick={handleSubmit}>
+        {login ? "Se connecter" : "S'inscrire"}
       </Button>
       <Typography variant='caption' sx={{marginTop: "8px"}}>
         Vous avez déjà un compte ? 
