@@ -31,7 +31,7 @@ export default function NewOrdo() {
   const [formRows, setFormRows] = useState([{ médicaments: 'aucun', boite: '0' }]);
   const [prenom, setPrenom] = useState('');
   const [nom, setNom] = useState('');
-  const [ordonnance, setOrdonnance] = useState('');
+  const [ordonnance, setOrdonnance] = useState('Patient :');
 
   const handleAddRow = () => {
     const newRow = { médicaments: 'aucun', boite: '0' };
@@ -130,43 +130,43 @@ export default function NewOrdo() {
 
 
 
-<Box
-component="form"
-sx={{
-  '& .MuiTextField-root': { m: 2, width: '25ch' },
-}}
-noValidate
-autoComplete="off"
->
-<Grid container spacing={9} alignItems="center">
-  <Grid item xs={6}>
-    <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
-  </Grid>
-  <Grid item xs={6}>
-    <TextField
-      id="outlined-select-boites-native"
-      select
-      label="Nombres de boîtes"
-      defaultValue="0"
-      SelectProps={{
-        native: true,
-      }}
-      variant="outlined"
-    >
-      {boites.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </TextField>
-  </Grid>
-  <Grid item xs={6}>
-    <Fab color="primary" aria-label="add">
-      <AddIcon />
-    </Fab>
-  </Grid>
-</Grid>
-</Box>
+        <Box
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 2, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+        >
+        <Grid container spacing={9} alignItems="center">
+          <Grid item xs={6}>
+            <TextField id="outlined-search" label="Autre médicament" type="search" variant="outlined" />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              id="outlined-select-boites-native"
+              select
+              label="Nombres de boîtes"
+              defaultValue="0"
+              SelectProps={{
+                native: true,
+              }}
+              variant="outlined"
+            >
+              {boites.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={6}>
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Grid>
+        </Grid>
+        </Box>
 
         <Grid container justifyContent="flex-end">
           <Grid item>
