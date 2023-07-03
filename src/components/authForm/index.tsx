@@ -1,12 +1,16 @@
 import { Button, Divider, TextField, Typography } from '@mui/material';
-import styles from './styles.module.css';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../firebase/authProvider';
 import useIsMobile from '../../hooks/useIsMobile';
+import styles from './styles.module.css';
 
 
 export default function AuthForm(){
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
+  const { signIn, signUp } = useAuth();
 
   const [login, setLogin] = useState(false);
   const [username, setUsername] = useState("");
@@ -15,6 +19,14 @@ export default function AuthForm(){
 
   const handleToggle = () => {
     setLogin(!login);
+  }
+
+  const handleAuth = () => {
+    if(login){
+      signIn(email, password);
+    } else {
+      signUp(email, password);
+    }
   }
 
   return (
@@ -40,7 +52,7 @@ export default function AuthForm(){
         <TextField id="password" label="Mot de passe" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
 
-      <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation>
+      <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation onClick={handleAuth}>
         S'inscrire
       </Button>
       <Typography variant='caption' sx={{marginTop: "8px"}}>
