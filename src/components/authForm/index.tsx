@@ -2,7 +2,7 @@ import { Button, Divider, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { useNavigate } from 'react-router-dom';
-import { signInUser } from '../../firebase/firebase';
+import { signInUser, signUpUser } from '../../firebase/firebase';
 import useIsMobile from '../../hooks/useIsMobile';
 
 import styles from './styles.module.css';
@@ -24,7 +24,7 @@ export default function AuthForm(){
   const handleSubmit = async () => {
     try {
       // Send the email and password to firebase
-      const userCredential = await signInUser(email, password)
+      const userCredential = login ? await signInUser(email, password) : await signUpUser(email, password);
 
       if (userCredential) {
         navigate('/home');

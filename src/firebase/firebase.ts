@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { NextOrObserver, User, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { NextOrObserver, User, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { getFirebaseConfig } from './config';
 
 
@@ -9,6 +9,15 @@ const app = initializeApp(getFirebaseConfig());
 const auth = getAuth(app);
 
 // Functions
+export const signUpUser = async (
+  email: string, 
+  password: string
+) => {
+  if (!email && !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password)
+}
+
 export const signInUser = async (
   email: string, 
   password: string
