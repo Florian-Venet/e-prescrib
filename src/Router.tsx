@@ -1,6 +1,7 @@
 import { User } from 'firebase/auth';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { AuthContext } from './firebase/authContext';
 import New from './pages/new';
 
 const Auth = React.lazy(() => import('./pages/auth'));
@@ -15,8 +16,10 @@ const Protected = ({ user, children } : { user: User | null, children: any}) => 
   return children;
 };
 
-const Router = ({user} : {user: User | null}) => {
-
+const Router = () => {
+  const { currentUser } = useContext(AuthContext)
+  const user = currentUser;
+  
   return (
     <React.Suspense fallback={<Loading />}>
       <Routes>
