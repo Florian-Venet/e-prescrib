@@ -1,7 +1,6 @@
 import { User } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AuthContext } from './firebase/authContext';
 import New from './pages/new';
 
 const Auth = React.lazy(() => import('./pages/auth'));
@@ -16,23 +15,21 @@ const Protected = ({ user, children } : { user: User | null, children: any}) => 
   return children;
 };
 
-const Router = () => {
-
-  const { currentUser } = useContext(AuthContext)
+const Router = ({user} : {user: User | null}) => {
 
   return (
     <React.Suspense fallback={<Loading />}>
       <Routes>
-        <Route path='/auth' element={currentUser ? <Navigate to="/home" /> : <Auth />} />
+        <Route path='/auth' element={user ? <Navigate to="/home" /> : <Auth />} />
 
         <Route path='/home' element={
-          <Protected user={currentUser}>
+          <Protected user={user}>
             <Home />
           </Protected>
         } />
         
         <Route path='/new' element={
-          <Protected user={currentUser}>
+          <Protected user={user}>
             <New />
           </Protected>
         } />
@@ -40,7 +37,7 @@ const Router = () => {
         <Route
           path="*"
           element={
-            currentUser ? <Navigate to="/home" /> : <Navigate to="/auth" />
+            user ? <Navigate to="/home" /> : <Navigate to="/auth" />
           }
         />
       </Routes>

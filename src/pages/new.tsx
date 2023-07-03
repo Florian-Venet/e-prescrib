@@ -1,17 +1,13 @@
-import NavBarre from "../components/navBarre/navBarre";
-import useIsMobile from "../hooks/useIsMobile";
-import { Button, Divider, TextField, Typography } from '@mui/material';
-import styles from './styles.module.css';
-import { useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
+import NavBar from "../components/navBar/navBar";
 import NewOrdo from "../components/newOrdo";
+import useIsMobile from "../hooks/useIsMobile";
 
 export default function New(){
     const isMobile = useIsMobile();
     
     return (
       <div>
-        <NavBarre/>
+        <NavBar/>
         <NewOrdo/>
       </div>
     )

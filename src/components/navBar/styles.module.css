@@ -1,0 +1,15 @@
+.navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color:#4153EF;
+  padding: 1rem 2rem;
+}
+
+.logo {
+  width: 45px;
+  height:45px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}

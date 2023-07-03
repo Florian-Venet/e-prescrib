@@ -19,14 +19,6 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@firebase/*": ["./src/firebase/*"]
-    }
   },
   "include": [
     "src"
