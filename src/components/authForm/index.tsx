@@ -44,7 +44,7 @@ export default function AuthForm(){
       </div>
 
       <Button variant='outlined' sx={{borderColor: "", borderRadius: "15px"}} disableElevation>
-        <FcGoogle style={{padding:"4px"}}/> {!login ? "S'inscrire" : "Se connecter"} avec Goggle
+        <FcGoogle style={{padding:"4px"}}/> {!login ? "S'inscrire" : "Se connecter"} avec Google
       </Button>
 
       <Divider sx={{margin: "32px 0"}}>ou</Divider>
@@ -61,8 +61,8 @@ export default function AuthForm(){
         {login ? "Se connecter" : "S'inscrire"}
       </Button>
       <Typography variant='caption' sx={{marginTop: "8px"}}>
-        Vous avez déjà un compte ? 
-        <span onClick={handleToggle} className={styles.button}> Se connecter</span>
+        Vous n'avez pas de compte ? 
+        <span onClick={handleToggle} className={styles.button}> S'inscrire</span>
       </Typography>
     </div>
   )
