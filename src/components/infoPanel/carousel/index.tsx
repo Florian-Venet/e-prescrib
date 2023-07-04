@@ -64,11 +64,13 @@ export default function Carousel() {
   return (
     <Box sx={{ maxWidth: 750, flexGrow: 1 }}>
       <div className={styles.header}>
-        <img src={logo} className={styles.logo} alt="logo" />
         <div className={styles.title}>
-          <Typography variant="h5">ePrescrib</Typography>
-          <Typography variant="subtitle1">Votre santé dans votre poche !</Typography>
-          <Typography variant="body2">salut salut</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <img src={logo} className={styles.logo} style={{ marginRight: '10px' }} alt="logo" />
+            <Typography sx={{ fontFamily: 'Montserrat' }} style={{ color: 'white' }} variant="h5">ePrescrib</Typography>
+          </Box><br/>
+          <Typography variant="h6">Votre santé dans votre poche !</Typography>
+          <Typography variant="body1">ePrescrib est une solution pensée pour changer notre rapport aux ordonnances en les rendant numérique. Terminé l'uttilisation du papier et de l'encre.</Typography>
         </div>
       </div>
 
