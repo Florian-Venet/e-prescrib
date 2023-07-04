@@ -1,15 +1,14 @@
-import styles from './styles.module.css';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MobileStepper from '@mui/material/MobileStepper';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import medecin from '../../../assets/medecin.png';
 import pharmacie from '../../../assets/parmacie.png';
 import pharmacie2 from '../../../assets/parmacie2.png';
-import logo from '../../../assets/logo.png';
+import styles from './styles.module.css';
 
 const steps = [
   {
@@ -28,11 +27,11 @@ const steps = [
     label: 'Le patient le scanne et récupère les informations',
     description: (
       <div className={styles.step}>
+        <img src={pharmacie} className={styles.img} alt="Scan du QR Code" />
         <div className={styles.description}>
           <Typography variant="h6">Le patient :</Typography><br/>
           <Typography variant="body1">Le patient scanne le QR Code via son application mobile et n'a plus qu'à se rendre en pharmacie pour récupérer ses médicaments.</Typography>
         </div>
-        <img src={pharmacie} className={styles.img} alt="Scan du QR Code" />
       </div>
     ),
   },
@@ -62,49 +61,36 @@ export default function Carousel() {
   };
 
   return (
-    <Box sx={{ maxWidth: 750, flexGrow: 1 }}>
-      <div className={styles.header}>
-        <div className={styles.title}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logo} className={styles.logo} style={{ marginRight: '10px' }} alt="logo" />
-            <Typography sx={{ fontFamily: 'Montserrat' }} style={{ color: 'white' }} variant="h5">ePrescrib</Typography>
-          </Box><br/>
-          <Typography variant="h6">Votre santé, simplifiée </Typography>
-          <Typography variant="body1">ePrescrib est une solution pensée pour changer notre rapport aux ordonnances en les rendant numérique. Terminé l'utilisation du papier et de l'encre.</Typography>
-        </div>
-      </div>
-
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', margin: 'auto', width: '90%'}}>
       <Box sx={{ p: 2 }}>
         {steps[activeStep].description}
       </Box>
       <MobileStepper
-        style={{ backgroundColor: 'transparent' }}
-        variant="dots"
-        steps={maxSteps}
-        position="bottom"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-            style={{ color: activeStep === maxSteps - 1 ? 'gray' : 'white', backgroundColor: 'transparent' }}
-            >
-            <KeyboardArrowRight />
-          </Button>
-        }
-          backButton={
-          <Button
-            size="small"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-            style={{ color: activeStep === 0 ? 'gray' : 'white', backgroundColor: 'transparent' }}
-            >
-            <KeyboardArrowLeft />
-          </Button>
-    }
-    />
-
+          style={{ backgroundColor: 'transparent', margin: '0 5rem'}}
+          variant="dots"
+          position='static'
+          steps={maxSteps}
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === maxSteps - 1}
+              style={{ color: 'white', backgroundColor: 'transparent', opacity: activeStep === maxSteps - 1 ? 0.4 : 1}}
+              >
+              <KeyboardArrowRight />
+            </Button>
+          }
+            backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+              style={{ color: 'white', backgroundColor: 'transparent', opacity: activeStep === 0 ? 0.4 : 1 }}
+              >
+              <KeyboardArrowLeft />
+            </Button>
+        }/>
     </Box>
   );
 }

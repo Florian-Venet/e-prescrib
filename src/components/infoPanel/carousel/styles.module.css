@@ -1,69 +1,14 @@
-.carousel {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin-bottom: 0;
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  padding: 1rem 2rem;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-  gap: 2vh;
-  color: white;
-}
-
 .step {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
 }
 
 .description {
-  margin-right: 3vh;
   color: white;
-  padding: 1rem 2rem;
 }
 
 .img {
   width: 100%;
   max-width: 50vh;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem 2rem;
 }
-
-.MuiMobileStepper-root {
-  background-color: transparent;
-  padding: 0;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.carousel {
-  text-align: center;
-  color: white;
-  display: flex;
-  align-items: center;
-}
-
-.logo {
-  width: 60px;
-  height: 60px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
