@@ -18,7 +18,7 @@ const steps = [
       <div className={styles.step}>
         <div className={styles.description}>
           <Typography variant="h6">Le médecin : </Typography><br/>
-          <Typography variant="body1">Le médecin créé l'ordonnance et génère un QR Code contenant toues les informations, que le patients peut répuréper via son application</Typography>
+          <Typography variant="body1">Le médecin créé l'ordonnance et génère un QR Code contenant toues les informations, que le patients peut répuréper via son application.</Typography>
         </div>
         <img src={medecin} className={styles.img} alt="QR Code" />
       </div>
@@ -30,7 +30,7 @@ const steps = [
       <div className={styles.step}>
         <div className={styles.description}>
           <Typography variant="h6">Le patient :</Typography><br/>
-          <Typography variant="body1">Le patient scanne le QR Code via son application mobile et n'a plus qu'à se rendre en pharmacie pour récupérer ses médicaments</Typography>
+          <Typography variant="body1">Le patient scanne le QR Code via son application mobile et n'a plus qu'à se rendre en pharmacie pour récupérer ses médicaments.</Typography>
         </div>
         <img src={pharmacie} className={styles.img} alt="Scan du QR Code" />
       </div>
@@ -42,7 +42,7 @@ const steps = [
       <div className={styles.step}>
         <div className={styles.description}>
           <Typography variant="h6">La pharmacienne :</Typography><br/>
-          <Typography variant="body1">La pharmacienne scanne à son tour le QR Code via le téléphone du patient et peut récupères ainsi l'ordonnance</Typography>
+          <Typography variant="body1">La pharmacienne scanne à son tour le QR Code via le téléphone du patient et peut récupères ainsi l'ordonnance.</Typography>
         </div>
         <img src={pharmacie2} className={styles.img} alt="Récupération par la pharmacienne" />
       </div>

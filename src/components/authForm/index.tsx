@@ -7,10 +7,9 @@ import useIsMobile from '../../hooks/useIsMobile';
 
 import styles from './styles.module.css';
 
-
-export default function AuthForm(){
+export default function AuthForm() {
   const { isMobile } = useIsMobile();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [login, setLogin] = useState(false);
   const [username, setUsername] = useState("");
@@ -20,7 +19,7 @@ export default function AuthForm(){
   const handleToggle = () => {
     setLogin(!login);
   }
-  
+
   const handleSubmit = async () => {
     try {
       // Send the email and password to firebase
@@ -29,39 +28,46 @@ export default function AuthForm(){
       if (userCredential) {
         navigate('/home');
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.log('User Sign In Failed', error.message);
     }
   };
 
   return (
-    <div className={styles.content} style={{width: !isMobile ? "30vw" : "80vw"}}>
+    <div className={styles.content} style={{ width: !isMobile ? "30vw" : "80vw" }}>
       <div className={styles.title}>
-        <Typography sx={{fontFamily: "Montserrat"}} variant='h5'>
+        <Typography sx={{ fontFamily: "Montserrat" }} variant='h5'>
           {!login ? "Inscrivez vous dès maintenant" : "Connectez vous à votre compte"}
         </Typography>
-        <Typography sx={{fontFamily: "Montserrat", opacity: "0.7"}} variant='subtitle2'>Simplifions les ordonnances ensemble</Typography>
+        <Typography sx={{ fontFamily: "Montserrat", opacity: "0.7" }} variant='subtitle2'>Simplifions les ordonnances ensemble</Typography>
       </div>
 
-      <Button variant='outlined' sx={{borderColor: "", borderRadius: "15px"}} disableElevation>
-        <FcGoogle style={{padding:"4px"}}/> {!login ? "S'inscrire" : "Se connecter"} avec Google
+      <Button variant='outlined' sx={{ borderColor: "", borderRadius: "15px" }} disableElevation>
+        <FcGoogle style={{ padding: "4px" }} /> {!login ? "S'inscrire" : "Se connecter"} avec Google
       </Button>
 
-      <Divider sx={{margin: "32px 0"}}>ou</Divider>
+      <Divider sx={{ margin: "32px 0" }}>ou</Divider>
 
       <div className={styles.form}>
-        {!login ? 
+        {!login ?
           <TextField id="name" label="Prénom" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
-        : null}
+          : null}
         <TextField id="email" label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <TextField id="password" label="Mot de passe" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <TextField
+          id="password"
+          label="Mot de passe"
+          variant="outlined"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
 
-      <Button variant='contained' sx={{backgroundColor: "#4153EF", borderRadius: "15px"}} disableElevation onClick={handleSubmit}>
+      <Button variant='contained' sx={{ backgroundColor: "#4153EF", borderRadius: "15px" }} disableElevation onClick={handleSubmit}>
         {login ? "Se connecter" : "S'inscrire"}
       </Button>
-      <Typography variant='caption' sx={{marginTop: "8px"}}>
-        Vous n'avez pas de compte ? 
+      <Typography variant='caption' sx={{ marginTop: "8px" }}>
+        Vous n'avez pas de compte ?
         <span onClick={handleToggle} className={styles.button}> S'inscrire</span>
       </Typography>
     </div>
