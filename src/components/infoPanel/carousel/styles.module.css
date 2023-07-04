@@ -2,7 +2,6 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 20px;
   position: fixed;
   left: 0;
   right: 0;
@@ -10,18 +9,16 @@
   margin-bottom: 0;
 }
 
-
 .header {
   display: flex;
   align-items: center;
-  gap: 16px;
   padding: 1rem 2rem;
 }
 
 .title {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2vh;
   color: white;
 }
 
@@ -29,18 +26,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1rem 2rem;
 }
 
 .description {
-  margin-right: 16px;
+  margin-right: 3vh;
   color: white;
+  padding: 1rem 2rem;
 }
 
 .img {
   width: 100%;
-  max-width: 300px;
+  max-width: 50vh;
   border: 1px solid #ddd;
   border-radius: 8px;
+  padding: 1rem 2rem;
 }
 
 .MuiMobileStepper-root {
@@ -52,7 +52,6 @@
   transform: translateX(-50%);
 }
 
-
 .carousel {
   text-align: center;
   color: white;
@@ -60,10 +59,9 @@
   align-items: center;
 }
 
-
 .logo {
   width: 60px;
-  height:60px;
+  height: 60px;
   background-color: white;
   border-radius: 50%;
   cursor: pointer;

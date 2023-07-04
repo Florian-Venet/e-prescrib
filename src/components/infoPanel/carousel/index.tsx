@@ -69,8 +69,8 @@ export default function Carousel() {
             <img src={logo} className={styles.logo} style={{ marginRight: '10px' }} alt="logo" />
             <Typography sx={{ fontFamily: 'Montserrat' }} style={{ color: 'white' }} variant="h5">ePrescrib</Typography>
           </Box><br/>
-          <Typography variant="h6">Votre santé dans votre poche !</Typography>
-          <Typography variant="body1">ePrescrib est une solution pensée pour changer notre rapport aux ordonnances en les rendant numérique. Terminé l'uttilisation du papier et de l'encre.</Typography>
+          <Typography variant="h6">Votre santé, simplifiée </Typography>
+          <Typography variant="body1">ePrescrib est une solution pensée pour changer notre rapport aux ordonnances en les rendant numérique. Terminé l'utilisation du papier et de l'encre.</Typography>
         </div>
       </div>
 
@@ -78,25 +78,33 @@ export default function Carousel() {
         {steps[activeStep].description}
       </Box>
       <MobileStepper
+        style={{ backgroundColor: 'transparent' }}
         variant="dots"
         steps={maxSteps}
-        position="static"
+        position="bottom"
         activeStep={activeStep}
         nextButton={
           <Button
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
-          >
+            style={{ color: activeStep === maxSteps - 1 ? 'gray' : 'white', backgroundColor: 'transparent' }}
+            >
             <KeyboardArrowRight />
           </Button>
         }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          backButton={
+          <Button
+            size="small"
+            onClick={handleBack}
+            disabled={activeStep === 0}
+            style={{ color: activeStep === 0 ? 'gray' : 'white', backgroundColor: 'transparent' }}
+            >
             <KeyboardArrowLeft />
           </Button>
-        }
-      />
+    }
+    />
+
     </Box>
   );
 }
