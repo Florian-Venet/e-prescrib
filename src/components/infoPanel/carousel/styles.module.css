@@ -1,26 +1,59 @@
 .carousel {
-    text-align: center;
-    color: white;
-    display: flex;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
 
-  .img {
-    width: 120%; 
-    justify-content: center; 
-    margin-left: 65vh;
-    margin-top: 40vh;
-  }
-  
-  .logo {
-    width: 45px;
-    height:45px;
-    background-color: white;
-    border-radius: 50%;
-    cursor: pointer;
-  }
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-  .carousel {
-    display: flex;
-    align-items: center;
-  }
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: white;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description {
+  margin-right: 16px;
+  color: white;
+}
+
+.img {
+  width: 100%;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.MuiMobileStepper-root {
+  background-color: transparent;
+  padding: 0;
+}
+
+.carousel {
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+
+.logo {
+  width: 55px;
+  height:55px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
